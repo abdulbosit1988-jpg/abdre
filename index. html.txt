@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forever Fitness - Premium Equipment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0a15, #1a1a2e);
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    header {
+      background: rgba(0,0,0,0.85);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #444;
+    }
+    .top-bar {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .logo h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #ffd700;
+      letter-spacing: 2px;
+    }
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .search-bar {
+      position: relative;
+    }
+    .search-bar input {
+      padding: 12px 40px 12px 20px;
+      border: 1px solid #555;
+      border-radius: 50px;
+      background: #1e1e2f;
+      color: #fff;
+      width: 220px;
+      outline: none;
+      transition: width 0.4s, border-color 0.4s;
+    }
+    .search-bar input:focus {
+      width: 300px;
+      border-color: #ffd700;
+    }
+    .search-bar i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ffd700;
+      font-size: 1.2rem;
+    }
+    .cart-wrapper {
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-icon {
+      font-size: 1.8rem;
+      color: #ffd700;
+      transition: transform 0.3s;
+    }
+    .cart-icon:hover { transform: scale(1.2); }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #ff4444;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #000;
+    }
+    .telegram-btn {
+      background: #0088cc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .telegram-btn:hover {
+      background: #00aaff;
+      transform: scale(1.05);
+    }
+    .hero {
+      background: rgba(0,0,0,0.7);
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    .container {
+      max-width: 1300px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+    .intro h2 {
+      font-size: 3.2rem;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+    .carousel { /* carousel styles remain the same */
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+    .slides { display: flex; transition: transform 0.8s ease-in-out; }
+    .slide { min-width: 100%; position: relative; }
+    .slide img { width: 100%; height: 500px; object-fit: cover; display: block; }
+    .caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffd700;
+      white-space: nowrap;
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #ffd700;
+      border: none;
+      font-size: 2.5rem;
+      padding: 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    .prev:hover, .next:hover { background: rgba(255,215,0,0.3); }
+    .prev { left: 20px; }
+    .next { right: 20px; }
+    .dots { text-align: center; margin-top: 20px; }
+    .dot {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin: 0 8px;
+      background: #555;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .dot.active { background: #ffd700; transform: scale(1.3); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+    }
+    .card {
+      background: #1e1e2f;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      transition: all 0.4s ease;
+      text-align: center;
+      border: 1px solid #444;
+    }
+    .card.hidden { display: none; }
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 60px rgba(255,215,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-bottom: 4px solid #ffd700;
+    }
+    .card-content { padding: 25px; }
+    .card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 15px;
+      color: #ffd700;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ff99;
+      margin: 15px 0;
+    }
+    .btn {
+      background: #ffd700;
+      color: #000;
+      padding: 14px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 20px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover {
+      background: #ffea00;
+      transform: scale(1.08);
+    }
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      background: #000;
+      margin-top: 100px;
+      border-top: 1px solid #333;
+    }
+    @media (max-width: 768px) {
+      .top-bar { flex-direction: column; }
+      .search-bar input { width: 100%; }
+      .search-bar input:focus { width: 100%; }
+      .hero h1 { font-size: 3.5rem; }
+      .slide img { height: 400px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <h1>Forever Fitness</h1>
+      </div>
+      <div class="nav-icons">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search equipment..." oninput="searchEquipment()">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="cart-wrapper" onclick="alert('Savatdagi mahsulotlar: ' + getCart().map(item => item.name).join(', ') || 'bo\'sh')">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Forever Fitness</h1>
+    <p>Time to Train – Elevate Your Strength, Sculpt Your Future, Live Forever Powerful</p>
+  </section>
+
+  <div class="container">
+    <div class="intro">
+      <h2>Premium Matrix Fitness Collection</h2>
+      <p>Explore high-performance gym machines built for serious training and timeless results.</p>
+    </div>
+
+    <!-- Carousel remains the same -->
+    <div class="carousel">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="https://assets.johnsonhealthtech.com/transform/7b03eef7-8428-493c-927c-decd466ac7b3/optimized-stainless-steel-cable-guides-jpg?io=transform:fill,width:1200,height:675" alt="Functional Trainer"><div class="caption">Multi-Station Functional Trainer</div></div>
+        <div class="slide"><img src="https://images.squarespace-cdn.com/content/v1/50e06d13e4b0a05702aea12f/69601db2-fab8-445b-9d81-e8c4443f0447/Matrix-Onyx-Collection---Web-Image.jpg" alt="Treadmill Collection"><div class="caption">High-End Treadmill Series</div></div>
+        <div class="slide"><img src="https://usedgymstore.com/assets/images/512674278_1141031104725928_3813795329067504216_n.jpg" alt="Chest Press"><div class="caption">Chest Press Machine</div></div
+        <div class="slide"><img src="https://assets.johnsonhealthtech.com/transform/78926da7-9e9d-4875-821a-7a44d2b954a6/space_saving_design-jpg?io=transform:fill,width:1200,height:665" alt="Lat Pulldown"><div class="caption">Diverging Lat Pulldown</div></div>
+      </div>
+      <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+      <button class="next" onclick="changeSlide(1)">&#10095;</button>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <div class="grid" id="equipmentGrid">
+      <div class="card" data-name="Functional Trainer Cable Machine">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/5/415061627/UA/VM/MP/133369607/matrix-versa-functional-trainer-machine.jpg" alt="Functional Trainer">
+        <div class="card-content">
+          <h3>Functional Trainer Cable Machine</h3>
+          <div class="price">$4,200 - $6,800</div>
+          <p>Full-body versatility with smooth cables and adjustable pulleys.</p>
+          <button class="btn" onclick="addToCart('Functional Trainer Cable Machine')">Get Quote</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Premium Treadmill with Console">
+        <img src="https://innovativefit.com/wp-content/uploads/2023/09/fd58de_9551cfa7cb9c48339b28107f8b9cc8abmv2.png" alt="Treadmill">
+        <div class="card-content">
+          <h3>Premium Treadmill with Console</h3>
+          <div class="price">$4,500 - $6,200</div>
+          <p>Commercial power, touchscreen & superior cushioning.</p>
+          <button class="btn" onclick="addToCart('Premium Treadmill with Console')">Get Quote</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Selectorized Chest Press">
+        <img src="https://usedgymstore.com/assets/images/513376774_1141031091392596_6763059948679512363_n.jpg" alt="Chest Press">
+        <div class="card-content">
+          <h3>Selectorized Chest Press</h3>
+          <div class="price">$3,200 - $5,500</div>
+          <p>Ergonomic pressing for chest & triceps development.</p>
+          <button class="btn" onclick="addToCart('Selectorized Chest Press')">Get Quote</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Plate-Loaded Strength Machine">
+        <img src="abd.png" alt="Plate-Loaded">
+        <div class="card-content">
+          <h3>Plate-Loaded Strength Machine</h3>
+          <div class="price">$4,800 - $7,000</div>
+          <p>Heavy-duty for legs, glutes & power training.</p>
+          <button class="btn" onclick="addToCart('Plate-Loaded Strength Machine')">Get Quote</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Lat Pulldown Station">
+        <img src="img.png" alt="Lat Pulldown">
+        <div class="card-content">
+          <h3>Lat Pulldown Station</h3>
+          <div class="price">$3,500 - $5,800</div>
+          <p>Build a wide back with smooth, comfortable pulls.</p>
+          <button class="btn" onclick="addToCart('Lat Pulldown Station')">Get Quote</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Forever Fitness – Time to Train. Become Unstoppable.</p>
+    <p>© 2026 Forever Fitness. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Carousel script (unchanged)
+    let currentSlide = 0;
+    const slidesContainer = document.getElementById('slides');
+    const dotsContainer = document.getElementById('dots');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll('.dot');
+    dots[0].classList.add('active');
+
+    function updateSlide() {
+      slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
+    }
+
+    function changeSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      updateSlide();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlide();
+    }
+
+    setInterval(() => changeSlide(1), 5000);
+
+    // Search functionality
+    function searchEquipment() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('#equipmentGrid .card');
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        if (name.includes(input)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Cart functionality
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      document.getElementById('cartCount').textContent = cart.length;
+    }
+
+    function addToCart(name) {
+      let cart = getCart();
+      // Oddiy qo'shish (takrorlanmasa ham bo'ladi, lekin hozir oddiy son)
+      cart.push({ name, added: new Date().toISOString() });
+      saveCart(cart);
+      updateCartCount();
+      alert(`${name} savatga qo'shildi!`);
+    }
+
+    // Init
+    updateCartCount();
+
+    // Touch for carousel
+    let touchStartX = 0;
+    let touchEndX = 0;
+    document.querySelector('.carousel').addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    document.querySelector('.carousel').addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) changeSlide(1);
+      else if (touchEndX - touchStartX > 50) changeSlide(-1);
+    });
+  </script>
+  <section>
+  </p>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="https://t.me/+998909022262" target="_blank" class="btn btn-telegram" style="font-size: 1.4rem; padding: 18px 40px;">
+        Open Telegram Chat →
+      </a>
+    </div>
+  </section>
+
+</body>
+</html>
